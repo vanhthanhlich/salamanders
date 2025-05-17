@@ -370,8 +370,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c420d93cbccd7747bce5d21cefb1895, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chain:
+    chain:
+    - {x: 0, y: 0}
+    - {x: 8.7297735, y: 0}
+    - {x: 10.7297735, y: 0}
+    - {x: 12.7297735, y: 0}
+    - {x: 14.7297735, y: 0}
+    - {x: 16.729774, y: 0}
+    - {x: 18.729774, y: 0}
+    - {x: 20.729774, y: 0}
+    radius:
+    - 8.7297735
+    - 2
+    - 2
+    - 2
+    - 2
+    - 2
+    - 2
+    - 2
   moveSpeed: 20
-  nPoint: 30
+  nPoint: 8
   radius: 2
 --- !u!4 &1800212260
 Transform:

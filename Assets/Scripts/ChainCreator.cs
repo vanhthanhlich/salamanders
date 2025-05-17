@@ -3,19 +3,24 @@ using UnityEngine;
 
 public class ChainCreator : MonoBehaviour
 {
+    [SerializeField, HideInInspector]
     public Chain chain;
     public float moveSpeed;
-    [SerializeField] private int nPoint;
+
+    [SerializeField, Range(1, 15)] public int nPoint;
     [SerializeField] private float radius;
 
-    public void CreateChain(int nPoint, float radius)
+    public void CreateChain()
     {
         chain = new Chain(nPoint, transform.position, radius);
     }
 
     private void Awake()
     {
-        CreateChain(nPoint, radius);
+        if(chain == null) {
+            Debug.Log("cai deo gi vay");
+            CreateChain();
+        }
     }
 
     private void OnDrawGizmos()

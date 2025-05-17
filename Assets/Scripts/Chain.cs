@@ -1,11 +1,18 @@
+using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
+using static UnityEngine.UI.Image;
 
+[System.Serializable]
 public class Chain
 {
+    [SerializeField, HideInInspector]
     private Vector2[] chain;
-    private float[] radius;
+
+    [SerializeField, HideInInspector]
+    public float[] radius;
 
     public Vector2 head { 
         get { return chain[0]; }
@@ -25,7 +32,7 @@ public class Chain
         float Sum = 0;
         for(int i = 0; i < nPoint; i++)
         {
-            if(i > 0) radius[i] = radius[i - 1] * (1 - .01f);
+            if (i > 0) radius[i] = radius[i - 1];
             chain[i] = origin + Sum * Vector2.right;
 
             Sum += radius[i];
@@ -51,6 +58,17 @@ public class Chain
         {
             Vector2 dir = chain[i] - chain[i - 1];
             chain[i] = chain[i - 1] + dir.normalized * radius[i - 1];
+        }
+    }
+
+    public void ChangeRadius(int id, float r)
+    {
+        radius[id] = r;
+        float Sum = 0;
+        for (int i = 0; i < chain.Length; i++)
+        {
+            chain[i] = chain[0] + Sum * Vector2.right;
+            Sum += radius[i];
         }
     }
 
