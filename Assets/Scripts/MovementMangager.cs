@@ -14,27 +14,23 @@ public class MovementMangager : MonoBehaviour
         creator = GetComponent<ChainCreator>();
     }
 
-    public void UpdateMovement(Vector2 target)
-    {
-        if(creator == null) return;
-        
-        if(coroutine != null) StopCoroutine(coroutine);
-        coroutine = StartCoroutine(chain.Move(target));
-    }
 
     private void Update()
     {
-        // Debug.Log("huhu");
         Inp();
     }
 
     private void Inp()
     {
-        if(Input.GetMouseButtonDown(0))
-        {
-            Vector2 mousePos = Camera.main.ScreenPointToRay(Input.mousePosition).origin;
-            UpdateMovement(mousePos);
-        }
+        Vector2 mousePos = Camera.main.ScreenPointToRay(Input.mousePosition).origin;
+        UpdateMovement(mousePos);
+    }
+    public void UpdateMovement(Vector2 target)
+    {
+        if(creator == null) return;
+        
+        if(coroutine != null) StopCoroutine(coroutine);
+        coroutine = StartCoroutine(chain.Move(target, creator.moveSpeed));
     }
 
 }

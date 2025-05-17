@@ -1,10 +1,11 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Chain
 {
     private Vector2[] chain;
-    private float radius;
+    private float[] radius;
 
     public Vector2 head { 
         get { return chain[0]; }
@@ -14,27 +15,30 @@ public class Chain
         }
     }
 
-    public Chain(int nPoint, Vector2 origin, float radius)
+    public Chain(int nPoint, Vector2 origin, float r)
     {
         chain = new Vector2[nPoint];
-        this.radius = radius;
+        radius = new float[nPoint];
 
-        for (int i = 0; i < nPoint; i++)
+        radius[0] = r;
+
+        float Sum = 0;
+        for(int i = 0; i < nPoint; i++)
         {
-            chain[i] = origin + Vector2.right * radius * i;
+            if(i > 0) radius[i] = radius[i - 1] * (1 - .01f);
+            chain[i] = origin + Sum * Vector2.right;
+
+            Sum += radius[i];
         }
     }
 
-    private float smooth(float t) {
-        return 3 * t * t - 2 * t * t * t;
-    }
-
-    public IEnumerator Move(Vector2 target)
+    public IEnumerator Move(Vector2 target, float moveSpeed)
     {
         float t = 0;
-        float rate = 20 / Vector2.Distance(head, target);
+        float rate = moveSpeed / Vector2.Distance(head, target);
+
         while(t < 1) {
-            t += rate * Time.deltaTime;
+            t += Time.deltaTime * rate;
             head = Vector2.Lerp(head, target, t);
             
             yield return null;
@@ -46,7 +50,7 @@ public class Chain
         for (int i = 1; i < chain.Length; i++)
         {
             Vector2 dir = chain[i] - chain[i - 1];
-            chain[i] = chain[i - 1] + dir.normalized * radius;
+            chain[i] = chain[i - 1] + dir.normalized * radius[i - 1];
         }
     }
 
@@ -56,5 +60,15 @@ public class Chain
     }
 
     public int Length { get { return chain.Length; } }
+
+    public void Draw()
+    {
+        Gizmos.color = Color.yellow;
+        for(int i = 0; i <  chain.Length; i++)
+        {
+            Gizmos.DrawWireSphere(chain[i], radius[i]);
+        }
+    }
+
 
 }
