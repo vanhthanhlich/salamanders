@@ -1,9 +1,18 @@
+using System.Collections;
 using UnityEngine;
 
 public class Chain
 {
     private Vector2[] chain;
     private float radius;
+
+    public Vector2 head { 
+        get { return chain[0]; }
+        set {
+            chain[0] = value;
+            MoveBodyToHead();
+        }
+    }
 
     public Chain(int nPoint, Vector2 origin, float radius)
     {
@@ -16,11 +25,24 @@ public class Chain
         }
     }
 
-    public void MovePoint(int id, Vector2 pos)
-    {
-        if (id != 0) return;
+    private float smooth(float t) {
+        return 3 * t * t - 2 * t * t * t;
+    }
 
-        chain[0] = pos;
+    public IEnumerator Move(Vector2 target)
+    {
+        float t = 0;
+        float rate = 20 / Vector2.Distance(head, target);
+        while(t < 1) {
+            t += rate * Time.deltaTime;
+            head = Vector2.Lerp(head, target, t);
+            
+            yield return null;
+        }
+    }
+
+    private void MoveBodyToHead()
+    {
         for (int i = 1; i < chain.Length; i++)
         {
             Vector2 dir = chain[i] - chain[i - 1];
