@@ -1,6 +1,7 @@
 using Codice.CM.Common.Tree.Partial;
 using Unity.Mathematics;
 using UnityEditor;
+using UnityEngine;
 
 [CustomEditor(typeof(ChainCreator))]
 public class ChainEditor : Editor
@@ -14,6 +15,18 @@ public class ChainEditor : Editor
         if(chain == null) creator.CreateChain();
     }
 
+    public override void OnInspectorGUI()
+    {
+        base.OnInspectorGUI();
+        
+        if(GUILayout.Button("reset"))
+        {
+            Undo.RecordObject(creator, "reset");
+            creator.CreateChain();
+        }
+
+    }
+
     private void OnSceneGUI()
     {
         Draw();
@@ -23,10 +36,10 @@ public class ChainEditor : Editor
     {
         for(int i = 0; i < chain.Length; i ++)
         {
-            float new_radius = Handles.RadiusHandle(quaternion.identity, chain[i], chain.radius[i] / 2);
-            if(new_radius * 2 !=  chain.radius[i]) {
+            float new_radius = Handles.RadiusHandle(quaternion.identity, chain[i], chain.radius[i]);
+            if(new_radius !=  chain.radius[i]) {
                 Undo.RecordObject(creator, "change radius of point " + i);
-                chain.ChangeRadius(i, new_radius * 2);
+                chain.ChangeRadius(i, new_radius);
             }
         }
     }

@@ -18,7 +18,7 @@ public class Chain
         get { return chain[0]; }
         set {
             chain[0] = value;
-            MoveBodyToHead();
+            UpdateBody();
         }
     }
 
@@ -28,14 +28,12 @@ public class Chain
         radius = new float[nPoint];
 
         radius[0] = r;
+        chain[0] = origin;
 
-        float Sum = 0;
-        for(int i = 0; i < nPoint; i++)
+        for(int i = 1; i < nPoint; i++)
         {
-            if (i > 0) radius[i] = radius[i - 1];
-            chain[i] = origin + Sum * Vector2.right;
-
-            Sum += radius[i];
+            radius[i] = r;
+            chain[i] = chain[i - 1] + (radius[i - 1] + radius[i]) * Vector2.right;
         }
     }
 
@@ -52,24 +50,19 @@ public class Chain
         }
     }
 
-    private void MoveBodyToHead()
+    private void UpdateBody()
     {
         for (int i = 1; i < chain.Length; i++)
         {
             Vector2 dir = chain[i] - chain[i - 1];
-            chain[i] = chain[i - 1] + dir.normalized * radius[i - 1];
+            chain[i] = chain[i - 1] + (radius[i - 1] + radius[i]) * dir.normalized;
         }
     }
 
     public void ChangeRadius(int id, float r)
     {
         radius[id] = r;
-        float Sum = 0;
-        for (int i = 0; i < chain.Length; i++)
-        {
-            chain[i] = chain[0] + Sum * Vector2.right;
-            Sum += radius[i];
-        }
+        UpdateBody();
     }
 
     public Vector2 this[int i]
