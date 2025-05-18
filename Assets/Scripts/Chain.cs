@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 [Serializable]
@@ -29,7 +31,9 @@ public class Chain
     public Vector2 head { 
         get { return chain[0].position; }
         set {
-            chain[0].direction = ((Vector2)value - chain[0].position).normalized;
+            Vector2 dir = (Vector2)value - chain[0].position;
+            if (dir != Vector2.zero) chain[0].direction = dir.normalized;
+
             chain[0].position = value;
             UpdateBody();
         }
@@ -88,39 +92,17 @@ public class Chain
 
     public void Draw()
     {
-
-        void DrawOutLine()
-        {
-
-            for (int i = 1; i < chain.Length; i++)
-            {
-                Gizmos.DrawLine(chain[i - 1].position + chain[i - 1].norm, chain[i].position + chain[i].norm);
-                Gizmos.DrawLine(chain[i - 1].position - chain[i - 1].norm, chain[i].position - chain[i].norm);
-            }
-
-            int id = 0;
-
-            Gizmos.DrawLine(chain[id].position + chain[id].direction * chain[id].radius, chain[id].position + chain[id].norm);
-            Gizmos.DrawLine(chain[id].position + chain[id].direction * chain[id].radius, chain[id].position - chain[id].norm);
-
-            id = chain.Length - 1;
-
-            Gizmos.DrawLine(chain[id].position - chain[id].direction * chain[id].radius, chain[id].position + chain[id].norm);
-            Gizmos.DrawLine(chain[id].position - chain[id].direction * chain[id].radius, chain[id].position - chain[id].norm);
-        }
-
         void DrawCircle()
         {
             for (int i = 0; i < chain.Length; i++)
             {
-                if (i != 1) continue;
                 Gizmos.color = Color.yellow;
                 Gizmos.DrawWireSphere(chain[i].position, chain[i].radius);
             }
         }
 
-        DrawOutLine();
-        // DrawCircle();
+        //DrawOutLine();
+        DrawCircle();
         
     }
 

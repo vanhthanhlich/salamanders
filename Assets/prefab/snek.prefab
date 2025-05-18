@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 6242551119395719676}
   - component: {fileID: 6999021920655321677}
   - component: {fileID: 7085502222940251236}
+  - component: {fileID: 2794963401277017002}
+  - component: {fileID: 4288101192075486548}
   m_Layer: 0
   m_Name: snek
   m_TagString: Untagged
@@ -49,52 +51,67 @@ MonoBehaviour:
     chain:
     - position: {x: 0, y: 0}
       direction: {x: -1, y: 0}
-      radius: 1
+      radius: 2
     - position: {x: 1, y: 0}
       direction: {x: -1, y: 0}
-      radius: 0.9
+      radius: 1.8
     - position: {x: 2, y: 0}
       direction: {x: -1, y: 0}
-      radius: 0.80999994
+      radius: 1.6199999
     - position: {x: 3, y: 0}
       direction: {x: -1, y: 0}
-      radius: 0.7289999
+      radius: 1.4579998
     - position: {x: 4, y: 0}
       direction: {x: -1, y: 0}
-      radius: 0.6560999
+      radius: 1.3121998
     - position: {x: 5, y: 0}
       direction: {x: -1, y: 0}
-      radius: 0.5904899
+      radius: 1.1809798
     - position: {x: 6, y: 0}
       direction: {x: -1, y: 0}
-      radius: 0.5314409
+      radius: 1.0628818
     - position: {x: 7, y: 0}
       direction: {x: -1, y: 0}
-      radius: 0.47829682
+      radius: 0.95659363
     - position: {x: 8, y: 0}
       direction: {x: -1, y: 0}
-      radius: 0.43046713
+      radius: 0.86093426
     - position: {x: 9, y: 0}
       direction: {x: -1, y: 0}
-      radius: 0.38742042
+      radius: 0.77484083
     - position: {x: 10, y: 0}
       direction: {x: -1, y: 0}
-      radius: 0.34867835
+      radius: 0.6973567
     - position: {x: 11, y: 0}
       direction: {x: -1, y: 0}
-      radius: 0.3138105
+      radius: 0.627621
     - position: {x: 12, y: 0}
       direction: {x: -1, y: 0}
-      radius: 0.28242943
+      radius: 0.56485885
     - position: {x: 13, y: 0}
       direction: {x: -1, y: 0}
-      radius: 0.25418648
+      radius: 0.50837296
     - position: {x: 14, y: 0}
       direction: {x: -1, y: 0}
-      radius: 0.22876783
+      radius: 0.45753565
+    - position: {x: 15, y: 0}
+      direction: {x: -1, y: 0}
+      radius: 0.4117821
+    - position: {x: 16, y: 0}
+      direction: {x: -1, y: 0}
+      radius: 0.37060386
+    - position: {x: 17, y: 0}
+      direction: {x: -1, y: 0}
+      radius: 0.33354348
+    - position: {x: 18, y: 0}
+      direction: {x: -1, y: 0}
+      radius: 0.30018914
+    - position: {x: 19, y: 0}
+      direction: {x: -1, y: 0}
+      radius: 0.2701702
   moveSpeed: 20
-  nPoint: 15
-  radius: 1
+  nPoint: 20
+  radius: 2
 --- !u!114 &7085502222940251236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,3 +124,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cc9e2689efc8184b918cc0dd4ab75cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!33 &2794963401277017002
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7751863128635440574}
+  m_Mesh: {fileID: 0}
+--- !u!23 &4288101192075486548
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7751863128635440574}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
