@@ -1,39 +1,53 @@
 using System;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering;
-using static UnityEngine.UI.Image;
 
-[System.Serializable]
+[Serializable]
 public class Chain
 {
-    [SerializeField, HideInInspector]
-    private Vector2[] chain;
+    [Serializable]
+    public struct Node
+    {
+        public Vector2 position;
+        public Vector2 direction;
+        public float radius;
 
-    [SerializeField, HideInInspector]
-    public float[] radius;
+        public Node(Vector2 position, float radius)
+        {
+            this.position = position;
+            this.radius = radius;
+            this.direction = Vector2.left;
+        }
+
+        public Vector2 norm { get { return radius * new Vector2(-direction.y, direction.x).normalized; } }
+
+    }
+
+    [SerializeField]
+    public Node[] chain;
 
     public Vector2 head { 
-        get { return chain[0]; }
+        get { return chain[0].position; }
         set {
-            chain[0] = value;
+            chain[0].direction = ((Vector2)value - chain[0].position).normalized;
+            chain[0].position = value;
             UpdateBody();
         }
     }
 
     public Chain(int nPoint, Vector2 origin, float r)
     {
-        chain = new Vector2[nPoint];
-        radius = new float[nPoint];
+        chain = new Node[nPoint];
+        chain[0] = new Node(origin, r);
 
-        radius[0] = r;
-        chain[0] = origin;
-
-        for(int i = 1; i < nPoint; i++)
+        for (int i = 1; i < nPoint; i++)
         {
-            radius[i] = r;
-            chain[i] = chain[i - 1] + (radius[i - 1] + radius[i]) * Vector2.right;
+            chain[i] = new Node()
+            {
+                radius = (1 - 0.1f) * chain[i - 1].radius,
+                position = chain[i - 1].position + Vector2.right,
+                direction = Vector2.left
+            };
         }
     }
 
@@ -54,18 +68,18 @@ public class Chain
     {
         for (int i = 1; i < chain.Length; i++)
         {
-            Vector2 dir = chain[i] - chain[i - 1];
-            chain[i] = chain[i - 1] + (radius[i - 1] + radius[i]) * dir.normalized;
+            Vector2 dir = (chain[i].position - chain[i - 1].position).normalized;
+            chain[i].position = chain[i - 1].position + dir;
+            chain[i].direction = -dir;
         }
     }
 
     public void ChangeRadius(int id, float r)
     {
-        radius[id] = r;
-        UpdateBody();
+        chain[id].radius = r;
     }
 
-    public Vector2 this[int i]
+    public Node this[int i]
     {
         get { return chain[i]; }
     }
@@ -74,11 +88,40 @@ public class Chain
 
     public void Draw()
     {
-        Gizmos.color = Color.yellow;
-        for(int i = 0; i <  chain.Length; i++)
+
+        void DrawOutLine()
         {
-            Gizmos.DrawWireSphere(chain[i], radius[i]);
+
+            for (int i = 1; i < chain.Length; i++)
+            {
+                Gizmos.DrawLine(chain[i - 1].position + chain[i - 1].norm, chain[i].position + chain[i].norm);
+                Gizmos.DrawLine(chain[i - 1].position - chain[i - 1].norm, chain[i].position - chain[i].norm);
+            }
+
+            int id = 0;
+
+            Gizmos.DrawLine(chain[id].position + chain[id].direction * chain[id].radius, chain[id].position + chain[id].norm);
+            Gizmos.DrawLine(chain[id].position + chain[id].direction * chain[id].radius, chain[id].position - chain[id].norm);
+
+            id = chain.Length - 1;
+
+            Gizmos.DrawLine(chain[id].position - chain[id].direction * chain[id].radius, chain[id].position + chain[id].norm);
+            Gizmos.DrawLine(chain[id].position - chain[id].direction * chain[id].radius, chain[id].position - chain[id].norm);
         }
+
+        void DrawCircle()
+        {
+            for (int i = 0; i < chain.Length; i++)
+            {
+                if (i != 1) continue;
+                Gizmos.color = Color.yellow;
+                Gizmos.DrawWireSphere(chain[i].position, chain[i].radius);
+            }
+        }
+
+        DrawOutLine();
+        // DrawCircle();
+        
     }
 
 

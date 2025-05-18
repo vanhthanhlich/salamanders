@@ -1,0 +1,109 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7751863128635440574
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6242551119395719676}
+  - component: {fileID: 6999021920655321677}
+  - component: {fileID: 7085502222940251236}
+  m_Layer: 0
+  m_Name: snek
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6242551119395719676
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7751863128635440574}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -7.224096, y: 7.8375306, z: -0.027581602}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6999021920655321677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7751863128635440574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c420d93cbccd7747bce5d21cefb1895, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chain:
+    chain:
+    - position: {x: 0, y: 0}
+      direction: {x: -1, y: 0}
+      radius: 1
+    - position: {x: 1, y: 0}
+      direction: {x: -1, y: 0}
+      radius: 0.9
+    - position: {x: 2, y: 0}
+      direction: {x: -1, y: 0}
+      radius: 0.80999994
+    - position: {x: 3, y: 0}
+      direction: {x: -1, y: 0}
+      radius: 0.7289999
+    - position: {x: 4, y: 0}
+      direction: {x: -1, y: 0}
+      radius: 0.6560999
+    - position: {x: 5, y: 0}
+      direction: {x: -1, y: 0}
+      radius: 0.5904899
+    - position: {x: 6, y: 0}
+      direction: {x: -1, y: 0}
+      radius: 0.5314409
+    - position: {x: 7, y: 0}
+      direction: {x: -1, y: 0}
+      radius: 0.47829682
+    - position: {x: 8, y: 0}
+      direction: {x: -1, y: 0}
+      radius: 0.43046713
+    - position: {x: 9, y: 0}
+      direction: {x: -1, y: 0}
+      radius: 0.38742042
+    - position: {x: 10, y: 0}
+      direction: {x: -1, y: 0}
+      radius: 0.34867835
+    - position: {x: 11, y: 0}
+      direction: {x: -1, y: 0}
+      radius: 0.3138105
+    - position: {x: 12, y: 0}
+      direction: {x: -1, y: 0}
+      radius: 0.28242943
+    - position: {x: 13, y: 0}
+      direction: {x: -1, y: 0}
+      radius: 0.25418648
+    - position: {x: 14, y: 0}
+      direction: {x: -1, y: 0}
+      radius: 0.22876783
+  moveSpeed: 20
+  nPoint: 15
+  radius: 1
+--- !u!114 &7085502222940251236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7751863128635440574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cc9e2689efc8184b918cc0dd4ab75cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

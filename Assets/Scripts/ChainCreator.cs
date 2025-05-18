@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ChainCreator : MonoBehaviour
 {
-    [SerializeField, HideInInspector]
+    [SerializeField]
     public Chain chain;
     public float moveSpeed;
 
