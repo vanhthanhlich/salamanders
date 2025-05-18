@@ -21,7 +21,7 @@ public class Chain
             this.direction = Vector2.left;
         }
 
-        public Vector2 norm { get { return radius * new Vector2(-direction.y, direction.x).normalized; } }
+        public Vector2 norm { get { return new Vector2(-direction.y, direction.x).normalized; } }
 
     }
 
