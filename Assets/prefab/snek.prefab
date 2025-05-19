@@ -51,22 +51,22 @@ MonoBehaviour:
     chain:
     - position: {x: 0, y: 0}
       direction: {x: -1, y: 0}
-      radius: 2
+      radius: 1.2222477
     - position: {x: 1, y: 0}
       direction: {x: -1, y: 0}
-      radius: 1.8
+      radius: 1.5878857
     - position: {x: 2, y: 0}
       direction: {x: -1, y: 0}
-      radius: 1.6199999
+      radius: 1.9055853
     - position: {x: 3, y: 0}
       direction: {x: -1, y: 0}
-      radius: 1.4579998
+      radius: 1.7428308
     - position: {x: 4, y: 0}
       direction: {x: -1, y: 0}
-      radius: 1.3121998
+      radius: 1.4902191
     - position: {x: 5, y: 0}
       direction: {x: -1, y: 0}
-      radius: 1.1809798
+      radius: 1.2521875
     - position: {x: 6, y: 0}
       direction: {x: -1, y: 0}
       radius: 1.0628818

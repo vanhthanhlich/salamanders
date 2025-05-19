@@ -57,11 +57,19 @@ public class ChainCreator : MonoBehaviour
 
         int x = 3;
         
-        void FormTriangle(int id)
+        void FormTriangle(int id, int f)
         {
             int l = vertices.Count;
-            AddTriangle(l - x, id, id + 1);
-            for (int i = 1; i < x; i++) AddTriangle(l - i, id, l - i - 1);
+            if(f == 0)
+            {
+                AddTriangle(l - x, id, id + 1);
+                for (int i = 1; i < x; i++) AddTriangle(l - i, id, l - i - 1);
+            }
+            else
+            {
+                AddTriangle(id, l - x, id + 1);
+                for (int i = 1; i < x; i++) AddTriangle(id, l - i, l - i - 1);
+            }
         }
 
         void go(int id, float angle)
@@ -81,10 +89,10 @@ public class ChainCreator : MonoBehaviour
         int curlast = vertices.Count - 2;
 
         go(0, -Mathf.PI / (x + 1));
-        FormTriangle(0);
+        FormTriangle(0, 0);
 
         go(chain.Length - 1, Mathf.PI / (x + 1));
-        FormTriangle(curlast);
+        FormTriangle(curlast, 1);
 
         mesh.vertices = vertices.ToArray();
         mesh.triangles = triangles.ToArray();
@@ -95,7 +103,7 @@ public class ChainCreator : MonoBehaviour
     private void OnDrawGizmos()
     {
         if (chain == null) return;
-        
+
         //foreach(var pos in idkman)
         //{
         //    Gizmos.color = Color.yellow;
